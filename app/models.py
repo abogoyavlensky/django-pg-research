@@ -10,11 +10,11 @@ class Post(models.Model):
     tags = ArrayField(models.PositiveIntegerField(), blank=True, null = True)
 
     def __unicode__(self):
-        return self.name
+        return '{0} Id: {1}'.format(self.name, self.id)
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=200, unique=True)
 
     def __unicode__(self):
-        return self.name
+        return '{0} Id: {1}'.format(self.name, self.id)

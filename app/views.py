@@ -13,10 +13,24 @@ class Home(TemplateView):
         tags_ids = Tag.objects.all().values_list('id', flat=True)
 
         context['posts_amount'] = Post.objects.count()
-        context['tags_amount'] = Tag.objects.count()
+        context['tags_amount'] = len(tags_ids)
         rand = random.sample(tags_ids, 5)
         context['rand'] = rand
-        context['overlap'] = Post.objects.filter(tags__overlap=rand)
+
+        # even one id in array
+        overlap = Post.objects.filter(tags__overlap=rand)
+        context['overlap'] = overlap
+        context['overlap_amount'] = len(overlap)
+
+        # values passed is subset of the data
+        contains = Post.objects.filter(tags__contains=rand)
+        context['contains'] = contains
+        context['contains_amount'] = len(contains)
+
+        # data is subset of the values passed
+        contained_by = Post.objects.filter(tags__contained_by=rand)
+        context['contained_by'] = contained_by
+        context['contained_by_amount'] = len(contained_by)
 
         return context
 
