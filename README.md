@@ -70,7 +70,10 @@ Time:
     Tags amount: ~15000
     
     Without any index    
-    Query time: ~20ms
+    Query time: ~23ms
+    
+    With btree index    
+    Query time: ~18ms    
     
     With GIN index    
     Query time: ~1.5ms
